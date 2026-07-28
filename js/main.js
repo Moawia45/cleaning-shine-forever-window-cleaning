@@ -26,13 +26,15 @@ function initDynamicConfig() {
     }
   });
 
-  // Replace href attributes for call / whatsapp / email links
+  // Replace href attributes for call / whatsapp / email / book links
   document.querySelectorAll('[data-config-href]').forEach(el => {
     const key = el.getAttribute('data-config-href');
     if (key === 'phone') {
       el.href = `tel:${SITE_CONFIG.phone}`;
-    } else if (key === 'whatsapp') {
-      el.href = `https://wa.me/${SITE_CONFIG.whatsappPhone}?text=Hi%20${encodeURIComponent(SITE_CONFIG.businessName)},%20I'd%20like%20to%20request%20a%20free%20cleaning%20quote!`;
+    } else if (key === 'whatsapp' || key === 'book') {
+      const msg = encodeURIComponent(`Hi ${SITE_CONFIG.businessName}, I would like to book a VIP Home Cleaning session! Please share available date slots and instant quote details.`);
+      el.href = `https://wa.me/${SITE_CONFIG.whatsappPhone}?text=${msg}`;
+      el.target = "_blank";
     } else if (key === 'email') {
       el.href = `mailto:${SITE_CONFIG.email}`;
     }
@@ -81,6 +83,15 @@ function initBeforeAfterSlider() {
   const beforeImg = container.querySelector('.slider-img-before');
 
   let isDragging = false;
+
+  function updateContainerWidth() {
+    if (container) {
+      container.style.setProperty('--container-width', container.offsetWidth + 'px');
+    }
+  }
+
+  updateContainerWidth();
+  window.addEventListener('resize', updateContainerWidth);
 
   function updateSliderPosition(x) {
     const rect = container.getBoundingClientRect();
@@ -200,7 +211,13 @@ function initFormValidation() {
       });
 
       if (isValid) {
-        showToast('Thank you! Your cleaning request has been submitted. We will contact you within 15 minutes.');
+        showToast('Redirecting to WhatsApp for instant VIP confirmation...');
+        const nameVal = form.querySelector('[id*="name"]')?.value || 'Customer';
+        const phoneVal = form.querySelector('[id*="phone"]')?.value || '';
+        const msgText = encodeURIComponent(`Hi ${SITE_CONFIG.businessName}, I would like to book a VIP Home Cleaning session!\nName: ${nameVal}\nPhone: ${phoneVal}\nPlease confirm my booking and provide available time slots.`);
+        setTimeout(() => {
+          window.open(`https://wa.me/${SITE_CONFIG.whatsappPhone}?text=${msgText}`, '_blank');
+        }, 800);
         form.reset();
       } else {
         showToast('Please fill out all required fields marked with *', true);
