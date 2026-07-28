@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cleaning Services | Shine Forever window cleaning - Brampton & GTA</title>
+  <meta name="description" content="Explore Shine Forever window cleaning' 24 premium cleaning services: House cleaning, deep scrub, move-in/out, condo, Airbnb turnover, office, and post-construction.">
+
+  <!-- Remix Icon CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress"></div>
+
+  <!-- Top Announcement Bar -->
+  <div class="header-top">
+    <div class="container header-top-inner">
+      <div class="top-info">
+        <a href="tel:+14165550199" data-config-href="phone"><i class="ri-phone-line"></i> <span data-config="displayPhone">+1 416-555-0199</span></a>
+        <a href="mailto:info@shineforeverwindowcleaning.ca" data-config-href="email"><i class="ri-mail-line"></i> <span data-config="email">info@shineforeverwindowcleaning.ca</span></a>
+      </div>
+      <div class="top-badges">
+        <span class="top-badge"><i class="ri-star-fill" style="color:#F59E0B;"></i> 4.8 Google Rating (53 Reviews)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glassmorphic Header -->
+  <header class="header-main">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><i class="ri-sparkles-line"></i></div>
+          <div class="logo-text">Shine<span>Forever window cleaning</span></div>
+        </a>
+
+        <ul class="nav-menu desktop-only">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="services.html" class="nav-link active">Services</a></li>
+          <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+          <li><a href="service-areas.html" class="nav-link">Service Areas</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <li><a href="testimonials.html" class="nav-link">Reviews</a></li>
+          <li><a href="faq.html" class="nav-link">FAQ</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="nav-ctas">
+          <a href="tel:+14165550199" data-config-href="phone" class="btn btn-outline btn-sm desktop-only"><i class="ri-phone-fill"></i> Call Today</a>
+          <a href="contact.html" class="btn btn-primary btn-sm"><i class="ri-calendar-check-line"></i> Book Now</a>
+          <button class="mobile-toggle" aria-label="Open Navigation"><i class="ri-menu-3-line"></i></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer-overlay"></div>
+  <aside class="mobile-drawer">
+    <div class="mobile-drawer-header">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="ri-sparkles-line"></i></div>
+        <div class="logo-text">Shine<span>Forever window cleaning</span></div>
+      </a>
+      <button class="mobile-drawer-close"><i class="ri-close-line"></i></button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="mobile-nav-link"><i class="ri-home-4-line"></i> Home</a></li>
+      <li><a href="about.html" class="mobile-nav-link"><i class="ri-information-line"></i> About Us</a></li>
+      <li><a href="services.html" class="mobile-nav-link"><i class="ri-cleaning-brush-line"></i> Services</a></li>
+      <li><a href="pricing.html" class="mobile-nav-link"><i class="ri-price-tag-3-line"></i> Pricing & Quote</a></li>
+      <li><a href="service-areas.html" class="mobile-nav-link"><i class="ri-map-pin-2-line"></i> Service Areas</a></li>
+      <li><a href="gallery.html" class="mobile-nav-link"><i class="ri-image-line"></i> Gallery</a></li>
+      <li><a href="testimonials.html" class="mobile-nav-link"><i class="ri-star-line"></i> Reviews</a></li>
+      <li><a href="faq.html" class="mobile-nav-link"><i class="ri-question-line"></i> FAQ</a></li>
+      <li><a href="contact.html" class="mobile-nav-link"><i class="ri-contacts-line"></i> Contact Us</a></li>
+    </ul>
+  </aside>
+
+  <!-- Services Header -->
+  <section class="section section-bg">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge"><i class="ri-cleaning-brush-line"></i> Comprehensive Catalog</span>
+        <h2>Explore Our 24 Professional Cleaning Services</h2>
+        <p>From residential maintenance to specialized commercial care, choose the service that fits your exact needs.</p>
+      </div>
+
+      <!-- Services Grid (24 Services) -->
+      <div class="services-grid" id="all-services-container">
+        <!-- Javascript dynamic render from SITE_CONFIG.services -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Script to dynamically render all 24 services from site-config -->
+  <script src="js/config.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('all-services-container');
+      if (!container || !SITE_CONFIG || !SITE_CONFIG.services) return;
+
+      const html = SITE_CONFIG.services.map(svc => `
+        <div class="service-card" id="${svc.id}">
+          <div class="service-icon-box"><i class="ri-${svc.icon || 'sparkles'}-line"></i></div>
+          <span class="badge badge-green" style="width:fit-content; margin-bottom:0.75rem; text-transform:capitalize;">${svc.category}</span>
+          <h3>${svc.name}</h3>
+          <p>${svc.desc}</p>
+          <div class="service-meta">
+            <span><i class="ri-time-line"></i> ${svc.duration}</span>
+            <strong style="color:var(--accent);"><i class="ri-shield-check-line"></i> 100% Guaranteed</strong>
+          </div>
+          <div class="service-card-footer">
+            <a href="contact.html?service=${svc.id}" class="btn btn-primary btn-full"><i class="ri-calendar-check-fill"></i> Book This Service</a>
+          </div>
+        </div>
+      `).join('');
+
+      container.innerHTML = html;
+    });
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>
